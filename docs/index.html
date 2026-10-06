@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clipboard Health|Analyst Assessment - senior care community account data quality use case</title>
+  <meta name="description" content="Case study overview for the Clipboard Health Analyst Assessment." />
+  <style>
+    :root{--bg:#0b1020;--panel:#121a2f;--panel2:#0f1629;--text:#f5f7fb;--muted:#aab4c8;--line:#26324f;--accent:#7cc4ff;--accent2:#8be0c2;--shadow:0 18px 50px rgba(0,0,0,.28)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top right,rgba(124,196,255,.13),transparent 30%),radial-gradient(circle at 20% 20%,rgba(139,224,194,.08),transparent 25%),var(--bg);color:var(--text);line-height:1.55}
+    .wrap{max-width:1180px;margin:0 auto;padding:28px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;z-index:10;padding:14px 0;backdrop-filter:blur(14px);background:linear-gradient(to bottom,rgba(11,16,32,.96),rgba(11,16,32,.72));border-bottom:1px solid rgba(255,255,255,.06)}
+    .brand{font-weight:800}.navlinks{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid var(--line);background:rgba(255,255,255,.03);font-weight:650;font-size:14px;color:var(--text)}.btn.primary{background:var(--text);color:#0b1020;border-color:var(--text)}
+    .hero{padding:72px 0 44px}.eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(124,196,255,.1);color:var(--accent);border:1px solid rgba(124,196,255,.25);font-size:13px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+    h1{font-size:clamp(38px,6vw,72px);line-height:1.02;margin:18px 0;max-width:980px}.lede{font-size:clamp(18px,2.2vw,24px);color:var(--muted);max-width:900px;margin:0 0 26px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin:34px 0 10px}.metric{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.metric b{font-size:30px;display:block}.metric span{color:var(--muted);font-size:13px}
+    section{padding:38px 0}h2{font-size:30px;margin:0 0 10px}h3{font-size:18px;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 22px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}.card p{margin:8px 0 0;color:var(--muted)}
+    .checklist{display:grid;gap:10px}.check{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06)}.tick{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(139,224,194,.12);color:var(--accent2);font-weight:900}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{text-align:center;padding:16px 10px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.025);min-height:130px;display:flex;flex-direction:column;justify-content:center}.step small{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.05em}.step b{margin:6px 0}.mock-label{font-size:12px;color:var(--muted)}
+    .case p{margin:4px 0 0}.pill{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--muted);margin:2px 4px 2px 0}.callout{border-left:4px solid var(--accent2);padding:16px 18px;background:rgba(139,224,194,.06);border-radius:10px;color:#dff8ef}
+    .next-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.future-card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}.future-card p{color:var(--muted);margin:8px 0 14px}
+    .mock{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px;background:#0b1223}.mock-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)}.mock-row:last-child{border-bottom:0}.mock-value{font-size:13px;font-weight:700}
+    .badge{display:inline-block;padding:4px 7px;border-radius:999px;font-size:11px;border:1px solid var(--line)}.badge.ok{color:var(--accent2);background:rgba(139,224,194,.08)}.badge.warn{color:#ffd596;background:rgba(255,213,150,.07)}
+    .timeline{display:grid;gap:9px}.event{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:start}.event time{font-size:11px;color:var(--accent)}.event div{font-size:13px;color:var(--muted)}
+    .slack{display:grid;gap:8px}.slack-line{padding:9px 10px;border-radius:8px;background:rgba(255,255,255,.035);font-size:12px;color:var(--muted)}
+    .report-bars{display:grid;gap:9px}.barline{display:grid;grid-template-columns:90px 1fr 28px;gap:8px;align-items:center;font-size:11px;color:var(--muted)}.bartrack{height:8px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}.barfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+    .learning{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}.learning:last-child{border-bottom:0}.learning-num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(124,196,255,.1);color:var(--accent);font-weight:800}
+    code{background:rgba(255,255,255,.06);padding:2px 6px;border-radius:6px}footer{padding:32px 0 50px;color:var(--muted);font-size:14px}
+    @media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:repeat(2,1fr)}.grid2,.grid3,.next-grid{grid-template-columns:1fr}}@media(max-width:560px){.wrap{padding:18px}.metrics{grid-template-columns:1fr 1fr}.nav{align-items:flex-start}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <div class="brand">Clipboard Health|Analyst Assessment - senior care community account data quality use case</div>
+    <div class="navlinks">
+      <a class="btn primary" href="https://github.com/lamaralpm-ES/Clipboard-assessment-LA" target="_blank" rel="noopener">GitHub Repo ↗</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="eyebrow">Clipboard Health · Analyst Assessment</span>
+    <h1>Clipboard Health|Analyst Assessment - senior care community account data quality use case</h1>
+    <p class="lede">A review-first Sales Ops workflow that scrapes Bellhaven facilities, matches them to CRM accounts, applies business rules for ownership changes and duplicates, and writes only after explicit approval.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="https://github.com/lamaralpm-ES/Clipboard-assessment-LA" target="_blank" rel="noopener">View implementation</a>
+    </div>
+    <div class="metrics">
+      <div class="metric"><b>34</b><span>Website communities</span></div>
+      <div class="metric"><b>121</b><span>CRM accounts evaluated</span></div>
+      <div class="metric"><b>20</b><span>Reconciliation proposals</span></div>
+      <div class="metric"><b>20</b><span>Reviewed decisions</span></div>
+      <div class="metric"><b>0</b><span>Open proposals after final rerun</span></div>
+    </div>
+  </header>
+
+  <section id="requirements">
+    <h2>Requirements Coverage</h2>
+    <p class="sub">The build was designed around the operational controls in the exercise, not just matching accuracy.</p>
+    <div class="checklist">
+      <div class="check"><div class="tick">✓</div><div><strong>Website scraping</strong><br><span class="sub">Current Bellhaven locations with name, address, city, state, ZIP and care offerings.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><strong>CRM matching + classification</strong><br><span class="sub">Confident matches, updates, new accounts, duplicates, stale accounts and ownership-change cases.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><strong>Human review before write</strong><br><span class="sub">Streamlit review app; CRM mutation occurs only after explicit approval.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><strong>CHOW billing-history rule</strong><br><span class="sub">If an account has both revenue history and outstanding AR greater than zero, the legacy account is preserved and a successor is created. If either condition is absent or zero, the existing account can be re-parented directly.</span></div></div>
+      <div class="check"><div class="tick">✓</div><div><strong>Daily-safe reruns</strong><br><span class="sub">The workflow remembers reviewed items and includes a daily GitHub Actions schedule configuration.</span></div></div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2>App Build Demo · Step by Step</h2>
+    <p class="sub">The full path from the assessment brief to a corrected CRM.</p>
+    <div class="flow">
+      <div class="step"><small>01</small><b>Read the brief</b><span class="mock-label">Defined outputs, approval controls and CHOW rules.</span></div>
+      <div class="step"><small>02</small><b>Inspect source + API</b><span class="mock-label">Mapped Bellhaven website data and CRM fields/endpoints.</span></div>
+      <div class="step"><small>03</small><b>Build scraper</b><span class="mock-label">Collected all current communities and facility details.</span></div>
+      <div class="step"><small>04</small><b>Build matcher</b><span class="mock-label">Normalized addresses and names, then linked facilities to CRM records.</span></div>
+      <div class="step"><small>05</small><b>Classify changes</b><span class="mock-label">Create, update, CHOW, duplicate or Needs Review.</span></div>
+      <div class="step"><small>06</small><b>Review in app</b><span class="mock-label">I checked the evidence and approved each proposed change.</span></div>
+      <div class="step"><small>07</small><b>Write to CRM</b><span class="mock-label">Only approved proposals were applied through the API.</span></div>
+      <div class="step"><small>08</small><b>Run final check</b><span class="mock-label">After all human approvals, I reran the pipeline and confirmed 0 open proposals.</span></div>
+    </div>
+  </section>
+
+  <section id="approach">
+    <h2>Matching Approach · What I Actually Did</h2>
+    <p class="sub">The matching logic used the strongest evidence first and avoided changing CRM records when the evidence was weak.</p>
+    <div class="grid2">
+      <div class="card"><h3>Step 1 · Standardize the source data</h3><p>I scraped all current Bellhaven community pages and standardized names and addresses so formatting differences such as “West” vs “W”, street abbreviations, capitalization and punctuation would not create false mismatches.</p></div>
+      <div class="card"><h3>Step 2 · Look for the same physical facility</h3><p>I first compared normalized street, city, state and ZIP. Matching the physical facility was treated as stronger evidence than the account name because names can change after an ownership transition.</p></div>
+      <div class="card"><h3>Step 3 · Use name + geography when the address differed</h3><p>If there was no exact address match, I looked for the same normalized facility name within the same city/state. This helped with PO Boxes and outdated address formatting without matching unrelated accounts elsewhere.</p></div>
+      <div class="card"><h3>Step 4 · Use controlled fuzzy matching only within the same area</h3><p>For remaining cases, I compared similar facility names only among accounts in the same city/state and required a strong enough match before proposing a change.</p></div>
+      <div class="card"><h3>Step 5 · Apply CRM business rules after the match</h3><p>Once a likely record was identified, I checked parent ownership, status, revenue, outstanding AR and duplicates to decide whether the correct action was update, direct re-parent, CHOW, create, duplicate handling or Needs Review.</p></div>
+      <div class="card"><h3>Step 6 · Human review before any write</h3><p>The system did not automatically change the CRM. I reviewed each proposal and its evidence in the app, then explicitly approved or rejected it. Only approved items were written through the API.</p></div>
+    </div>
+  </section>
+
+  <section id="results">
+    <h2>What the Reconciliation Found</h2>
+    <p class="sub">The 20 proposals grouped by the type of CRM action required.</p>
+    <div class="grid3">
+      <div class="card case"><h3>Account updates</h3><span class="pill">Name</span><span class="pill">Address</span><span class="pill">Parent</span><p>Existing accounts were corrected when the current website clearly matched the same physical facility. This included canonical facility names, address corrections and direct re-parenting where the CHOW rule did not apply.</p></div>
+      <div class="card case"><h3>New account creation</h3><span class="pill">Missing CRM record</span><p>Current website facilities with no supported CRM match were created under the Bellhaven parent instead of forcing an uncertain match.</p></div>
+      <div class="card case"><h3>CHOW / ownership change</h3><span class="pill">Legacy account preserved</span><p>Marietta and Tiffin had both revenue history and outstanding AR, so their historical accounts were preserved and new Bellhaven successor accounts were created and linked.</p></div>
+      <div class="card case"><h3>Duplicate resolution</h3><span class="pill">Inactive loser</span><span class="pill">Survivor linked</span><p>Confirmed duplicate records at the same physical Bellhaven location were resolved by keeping the surviving account and marking the losing copy Inactive with a duplicate reference.</p></div>
+      <div class="card case"><h3>Stale Bellhaven accounts</h3><span class="pill">Needs Review</span><p>Existing Bellhaven child accounts that no longer appeared on the current website were moved to Needs Review rather than reassigned to another parent without evidence.</p></div>
+      <div class="card case"><h3>Ambiguous ownership history</h3><span class="pill">No forced change</span><p>When the website and CRM data did not provide enough physical-location evidence to support changing an existing record, that account was left unchanged and the current facility was handled separately.</p></div>
+    </div>
+    <div class="callout" style="margin-top:18px"><strong>Final result:</strong> all proposed changes were reviewed by a human, approved changes were applied, and the pipeline was rerun as a final validation. The rerun returned <strong>0 open proposals</strong>.</div>
+  </section>
+
+  <section id="learnings">
+    <h2>Iteration & Learnings</h2>
+    <p class="sub">The first pass was tested against the live data, and the results showed where the matching approach needed improvement. I refined the logic before applying changes.</p>
+    <div class="card">
+      <div class="learning"><div class="learning-num">1</div><div><strong>Initial matching was too narrow</strong><p>The first dry run surfaced only a small subset of expected discrepancies. I revisited the matcher, improved address normalization, and changed the sequence so it first looked for the same physical location, then name matches within the same city/state, and only then used controlled fuzzy matching.</p></div></div>
+      <div class="learning"><div class="learning-num">2</div><div><strong>Ownership history created ambiguous cases</strong><p>Facilities such as Kettering and Union Square showed why same-city or similar-name matches are not enough. When the physical-location evidence was not strong enough, I did not change the existing CRM account or force a re-parent.</p></div></div>
+      <div class="learning"><div class="learning-num">3</div><div><strong>Billing history changed the correct CRM action</strong><p>The CHOW rule meant that some apparent re-parenting tasks actually required preserving the historical account and creating a successor. That business rule was built directly into proposal generation.</p></div></div>
+      <div class="learning"><div class="learning-num">4</div><div><strong>Final-state validation mattered</strong><p>After I reviewed all proposals and approved the changes, I reran the pipeline as a final check. It returned 0 open proposals, confirming that the approved changes had been applied and there was nothing left for review.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Safety & Controls</h2>
+    <div class="grid3">
+      <div class="card"><h3>No automatic CRM writes</h3><p>Scraping and matching are read-only. A CRM change only happens after a reviewer explicitly approves the proposal.</p></div>
+      <div class="card"><h3>Previously reviewed items are remembered</h3><p>The app stores decisions that were already made so the same proposal does not keep coming back for review on the next run.</p></div>
+      <div class="card"><h3>Credentials kept out of the code</h3><p>The assessment API token is never stored in source control or committed to GitHub.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How AI Was Used</h2>
+    <div class="card"><p>I used ChatGPT as a development and analysis partner to inspect API behavior, develop and debug the matching pipeline and review app, and pressure-test edge cases. AI accelerated implementation and testing, while I reviewed the underlying CRM evidence and business rules before approving any write.</p></div>
+  </section>
+
+  <section id="next">
+    <h2>What I’d Build Next</h2>
+    <p class="sub">The next iteration would focus on auditability, automated quality checks and better visibility for Sales and Finance.</p>
+    <div class="next-grid">
+      <div class="future-card">
+        <h3>1 · Full All-Time Visual Changelog</h3>
+        <p>A searchable audit trail across every run showing what changed, why, who approved it and the resulting CRM state. Search by CRM record ID, facility name, change type or date.</p>
+        <div class="mock timeline">
+          <div class="slack-line">🔎 Search: CRM ID, facility, change type, date…</div>
+          <div class="event"><time>09:42</time><div><strong>Tiffin</strong> · CHOW approved<br>Old account preserved → successor created</div></div>
+          <div class="event"><time>09:48</time><div><strong>Owosso</strong> · Duplicate resolved<br>Losing record → Inactive</div></div>
+          <div class="event"><time>10:03</time><div><strong>Ashtabula</strong> · Address corrected<br>PO Box → physical location</div></div>
+        </div>
+      </div>
+
+      <div class="future-card">
+        <h3>2 · Automated Regression & Business-Rule Tests</h3>
+        <p>Replace most manual QA with repeatable tests covering matching, CHOW, duplicate handling, stale accounts and rerun behavior.</p>
+        <div class="mock">
+          <div class="mock-row"><span class="mock-label">Address normalization</span><span class="badge ok">PASS</span></div>
+          <div class="mock-row"><span class="mock-label">CHOW: revenue + AR</span><span class="badge ok">PASS</span></div>
+          <div class="mock-row"><span class="mock-label">Duplicate survivor logic</span><span class="badge ok">PASS</span></div>
+          <div class="mock-row"><span class="mock-label">Second-run validation</span><span class="badge ok">PASS</span></div>
+        </div>
+      </div>
+
+      <div class="future-card">
+        <h3>3 · Shared Sales / Finance Operations Report</h3>
+        <p>A lightweight HTML report summarizing each run, changes by type, unresolved exceptions, recurring CRM data-quality patterns and changes by CRM Account Owner.</p>
+        <div class="mock report-bars">
+          <div class="barline"><span>Updates</span><div class="bartrack"><div class="barfill" style="width:78%"></div></div><b>11</b></div>
+          <div class="barline"><span>Creates</span><div class="bartrack"><div class="barfill" style="width:28%"></div></div><b>4</b></div>
+          <div class="barline"><span>CHOW</span><div class="bartrack"><div class="barfill" style="width:16%"></div></div><b>2</b></div>
+          <div class="barline"><span>Needs Review</span><div class="bartrack"><div class="barfill" style="width:22%"></div></div><b>3</b></div>
+          <div class="mock-row" style="margin-top:8px"><span class="mock-label">Account Owner view</span><span class="mock-value">Filter / Group ▼</span></div>
+          <div class="barline"><span>Account 1</span><div class="bartrack"><div class="barfill" style="width:62%"></div></div><b>8</b></div>
+          <div class="barline"><span>Account 2</span><div class="bartrack"><div class="barfill" style="width:38%"></div></div><b>5</b></div>
+        </div>
+      </div>
+
+      <div class="future-card">
+        <h3>4 · Sales Record Account 1lerts & Optional Approval Routing</h3>
+        <p>Surface the Sales Record Owner on the CRM account overview and alert them when a merge, ownership change or other material update is proposed. For higher-risk changes, the owner could optionally be included in the approval flow through Slack or a similar integration.</p>
+        <div class="mock slack">
+          <div class="slack-line"><strong>#crm-change-alerts</strong></div>
+          <div class="slack-line">Bellhaven of Tiffin · ownership change proposed</div>
+          <div class="slack-line">Sales Record Owner: <strong>Jamie R.</strong> · Finance reviewer: <strong>Required</strong></div>
+          <div class="mock-row"><span class="badge warn">Awaiting approval</span><span class="mock-value">Review →</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer><strong>Clipboard Health|Analyst Assessment - senior care community account data quality use case</strong><br></footer>
+</div>
+</body>
+</html>
